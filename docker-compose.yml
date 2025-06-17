@@ -1,0 +1,21 @@
+version: "2.14.0"
+
+services:
+  mysql:
+    image: "mysql:8-oracle"
+    container_name: learning_portal-mysql
+    ports:
+      - "127.0.0.1:3306:3306" # restricting exposure
+    # network_mode: "host"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dummypassword
+      - MYSQL_DATABASE=learning_portal_database
+      - MYSQL_USER=learning_portal_user
+      - MYSQL_PASSWORD=dummypassword
+    command: --bind-address=0.0.0.0 # need to be added to access the mysql server in the container through localhost
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    volumes:
+      - "./backend/resources/database/init.sql:/docker-entrypoint-initdb.d/1.sql"
