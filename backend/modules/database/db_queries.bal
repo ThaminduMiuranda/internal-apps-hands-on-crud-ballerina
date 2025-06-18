@@ -19,3 +19,8 @@ isolated function putUser(int id, NewUser updatedUser) returns sql:Parameterized
     sql:ParameterizedQuery query = `UPDATE users SET name = ${updatedUser.name}, email = ${updatedUser.email}, role = ${updatedUser.role}, phone = ${updatedUser.phone} WHERE id = ${id}`;
     return query;
 }
+
+isolated function deleUser(int id) returns sql:ParameterizedQuery {
+    sql:ParameterizedQuery query = `DELETE FROM users WHERE id = ${id}`;
+    return query;
+}

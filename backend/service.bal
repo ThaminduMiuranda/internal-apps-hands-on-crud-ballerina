@@ -25,4 +25,8 @@ service /learning\-portal on new http:Listener(9090) {
     resource function put users/[int id](http:RequestContext ctx, database:NewUser updatedUser) returns http:Ok|error {
         return database:updateUser(id, updatedUser);
     }
+
+    resource function delete users/[int id](http:RequestContext ctx) returns http:Ok|error {
+        return database:deleteUser(id);
+    }
 }

@@ -48,3 +48,8 @@ public function updateUser(int id, NewUser updatedUser) returns http:Ok|error {
 
     return http:OK;
 }
+
+public isolated function deleteUser(int id) returns http:Ok|error {
+    _ = check LearningPortalDb->execute(deleUser(id));
+    return http:OK;
+}
