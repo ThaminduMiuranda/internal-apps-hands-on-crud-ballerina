@@ -24,3 +24,18 @@ isolated function deleUser(int id) returns sql:ParameterizedQuery {
     sql:ParameterizedQuery query = `DELETE FROM users WHERE id = ${id}`;
     return query;
 }
+
+isolated function search(string name, string role) returns sql:ParameterizedQuery {
+    sql:ParameterizedQuery baseQuery = `SELECT * FROM users WHERE 1=1`;
+    sql:ParameterizedQuery searchQuery = baseQuery;
+
+    if name != "" {
+        searchQuery = sql:queryConcat(searchQuery, ` AND name LIKE ${"%" + name + "%"}`);
+    }
+
+    if role != "" {
+        searchQuery = sql:queryConcat(searchQuery, ` AND role = ${role}`);
+    }
+
+    return searchQuery;
+}

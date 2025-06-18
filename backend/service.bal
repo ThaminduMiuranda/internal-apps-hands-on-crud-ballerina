@@ -29,4 +29,11 @@ service /learning\-portal on new http:Listener(9090) {
     resource function delete users/[int id](http:RequestContext ctx) returns http:Ok|error {
         return database:deleteUser(id);
     }
+
+    resource function get users/user(http:RequestContext ctx, string name, string role) returns database:User[]|error {
+
+        database:User[]|error allUsers = database:searchUsers(name, role);
+
+        return allUsers;
+    }
 }

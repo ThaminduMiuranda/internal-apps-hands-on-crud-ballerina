@@ -53,3 +53,16 @@ public isolated function deleteUser(int id) returns http:Ok|error {
     _ = check LearningPortalDb->execute(deleUser(id));
     return http:OK;
 }
+
+public isolated function searchUsers(string name, string role) returns User[]|error {
+    stream<User, sql:Error?> userStream = LearningPortalDb->query(search(name, role));
+
+    User[] userList = [];
+
+    check from var user in userStream
+        do {
+            userList.push(user);
+        };
+
+    return userList;
+}
