@@ -42,3 +42,9 @@ public isolated function insertUser(NewUser newUser) returns http:Created|error 
 
     return http:CREATED;
 }
+
+public function updateUser(int id, NewUser updatedUser) returns http:Ok|error {
+    _ = check LearningPortalDb->execute(putUser(id, updatedUser));
+
+    return http:OK;
+}

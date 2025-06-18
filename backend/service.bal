@@ -21,4 +21,8 @@ service /learning\-portal on new http:Listener(9090) {
     resource function post users(http:RequestContext ctx, database:NewUser newUser) returns http:Created|error {
         return database:insertUser(newUser);
     }
+
+    resource function put users/[int id](http:RequestContext ctx, database:NewUser updatedUser) returns http:Ok|error {
+        return database:updateUser(id, updatedUser);
+    }
 }
