@@ -10,4 +10,9 @@ service /learning\-portal on new http:Listener(9090) {
         
         return users;
     }
+
+    resource function get users/[int id](http:RequestContext ctx) returns User|database:UserNotFound|error {
+        database:User|database:UserNotFound|error user = database:userById(id);
+        return user;
+    }
 }

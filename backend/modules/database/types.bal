@@ -1,5 +1,7 @@
 // import ballerina/sql;
 // import ballerinax/mysql;
+import ballerina/http;
+import ballerina/time;
 
 type DatabaseConfig record {|
     string user;
@@ -17,5 +19,15 @@ public type User record {|
     string phone;
 |};
 
+public type ErrorDetails record {|
+    string message;
+    string details;
+    time:Utc timeStamp;
+|};
+
+public type UserNotFound record {|
+    *http:NotFound;
+    ErrorDetails body;
+|};
 
 
