@@ -1,10 +1,30 @@
+import ballerina/http;
 import ballerina/sql;
 import ballerina/time;
 
 public isolated function users() returns User[]|error {
     stream<User, sql:Error?> userStream = LearningPortalDb->query(retrieveAllUsers());
-    return from var user in userStream
-        select user;
+
+    User[] userList = [];
+
+    check from var user in userStream
+        do {
+            Role|error role = <Role>user.role;
+            if role is error {
+                return error("Invalid role value from DB: " + user.role);
+            }
+
+            userList.push({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: role,
+                phone: user.phone
+            });
+
+        };
+
+    return userList;
 }
 
 public isolated function userById(int id) returns User|UserNotFound|error {
@@ -15,4 +35,10 @@ public isolated function userById(int id) returns User|UserNotFound|error {
         return userNotFound;
     }
     return result;
+}
+
+public isolated function insertUser(NewUser newUser) returns http:Created|error {
+    _ = check LearningPortalDb->execute(postUser(newUser));
+
+    return http:CREATED;
 }

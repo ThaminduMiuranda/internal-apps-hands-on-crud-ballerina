@@ -1,11 +1,16 @@
 import ballerina/sql;
 
-isolated function retrieveAllUsers() returns sql:ParameterizedQuery{
+isolated function retrieveAllUsers() returns sql:ParameterizedQuery {
     sql:ParameterizedQuery query = `SELECT * FROM users`;
     return query;
 }
 
-isolated function retrieveUserById(int id) returns sql:ParameterizedQuery{
+isolated function retrieveUserById(int id) returns sql:ParameterizedQuery {
     sql:ParameterizedQuery query = `SELECT * FROM users WHERE id = ${id}`;
-    return query; 
+    return query;
+}
+
+isolated function postUser(NewUser newUser) returns sql:ParameterizedQuery {
+    sql:ParameterizedQuery query = `INSERT INTO users (name, email, role, phone) VALUES (${newUser.name}, ${newUser.email}, ${newUser.role}, ${newUser.phone})`;
+    return query;
 }
