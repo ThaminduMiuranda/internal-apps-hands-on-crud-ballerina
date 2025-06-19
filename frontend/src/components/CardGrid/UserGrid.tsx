@@ -1,19 +1,31 @@
-import { getUsers } from "@/lib/api";
+"use client";
+
 import { User } from "@/types/types";
-import { use } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import UserCard from "../Card/UserCard";
-
-const fetchUsers = async () => {
-  const res = await getUsers();
-  if (res.status != 200) {
-    // add error no users
-  }
-  return res.data;
-};
+import { fetchUsers, handleDelete } from "@/lib/apiService";
 
 export default function UserGrid() {
-  const users = use<User[]>(fetchUsers());
+  const [users, setUsers] = useState<User[]>([]);
+
+  const loadUsers = async () => {
+    const response = await fetchUsers();
+    setUsers(response);
+  };
+
+  const onDelete = async (id: number) => {
+    await handleDelete(id);
+    await loadUsers();
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  useEffect(() => {
+    console.log("Users updated:", users);
+  }, [users]);
 
   return (
     <>
@@ -31,7 +43,7 @@ export default function UserGrid() {
         </div>
         <div className="grid grid-cols-2 gap-[3ch]">
           {users.map((user) => (
-            <UserCard key={user.id} user={user} />
+            <UserCard key={user.id} user={user} onDelete={onDelete} />
           ))}
         </div>
       </div>

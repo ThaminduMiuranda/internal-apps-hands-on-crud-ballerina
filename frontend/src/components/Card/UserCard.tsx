@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 export default function UserCard(props: any) {
@@ -16,7 +18,8 @@ export default function UserCard(props: any) {
               alt="Delete User"
               width={24}
               height={24}
-              className=""
+              className="mouse-pointer"
+              onClick={() => props.onDelete(user.id)}
             />
             <Image
               src={"assets/images/editUser.svg"}
