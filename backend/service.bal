@@ -4,6 +4,17 @@ import ballerina/http;
 
 // import ballerina/sql;
 
+// listener http:Listener userApiEP = new(9090);
+
+@http:ServiceConfig {
+    cors: {
+        allowOrigins: ["http://localhost:3000"],
+        allowMethods: ["GET", "POST", "PUT", "DELETE"],
+        allowHeaders: ["Content-Type"],
+        allowCredentials: false
+    }
+}
+
 service /learning\-portal on new http:Listener(9090) {
 
     resource function get users(http:RequestContext ctx) returns database:User[]|error {
