@@ -9,7 +9,7 @@ import ballerina/http;
 @http:ServiceConfig {
     cors: {
         allowOrigins: ["http://localhost:3000", "http://localhost:5173"],
-        allowMethods: ["GET", "POST", "PUT", "DELETE"],
+        allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowHeaders: ["Content-Type"],
         allowCredentials: false
     }
