@@ -153,7 +153,7 @@ service /learning\-portal on new http:Listener(9090) {
 
         User[]|error result = database:searchUsers(name, role);
 
-        if result is sql:NoRowsError {
+        if result is sql:NoRowsError || result == [] {
             UserNotFound userNotFound = {body: {message: "User not found", details: string `User with serched name doesn't exist`}};
             return userNotFound;
         }
