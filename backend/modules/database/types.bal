@@ -1,7 +1,6 @@
 // import ballerina/sql;
 // import ballerinax/mysql;
-import ballerina/http;
-import ballerina/time;
+
 import ballerina/constraint;
 
 type DatabaseConfig record {|
@@ -12,9 +11,9 @@ type DatabaseConfig record {|
     int port;
 |};
 
-public type Role "student" | "instructor" | "admin";
+type Role "student"|"instructor"|"admin";
 
-public type User record {|
+type User record {|
     readonly int id;
     string name;
     string email;
@@ -33,21 +32,20 @@ public type NewUser record {|
     }
     string email;
     string role;
-    @constraint:String{
+    @constraint:String {
         pattern: re `^(\+94|0)[0-9]{9}$`
     }
     string phone;
 |};
 
-public type ErrorDetails record {|
-    string message;
-    string details;
-    time:Utc timeStamp;
-|};
+// public type ErrorDetails record {|
+//     string message;
+//     string details;
+//     time:Utc timeStamp;
+// |};
 
-public type UserNotFound record {|
-    *http:NotFound;
-    ErrorDetails body;
-|};
-
+// public type UserNotFound record {|
+//     *http:NotFound;
+//     ErrorDetails body;
+// |};
 

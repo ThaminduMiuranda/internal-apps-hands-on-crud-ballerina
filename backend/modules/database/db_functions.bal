@@ -1,6 +1,4 @@
-import ballerina/http;
 import ballerina/sql;
-import ballerina/time;
 
 public isolated function users() returns User[]|error {
     stream<User, sql:Error?> userStream = LearningPortalDb->query(retrieveAllUsers());
@@ -27,31 +25,34 @@ public isolated function users() returns User[]|error {
     return userList;
 }
 
-public isolated function userById(int id) returns User|UserNotFound|error {
+public isolated function userById(int id) returns User|error {
     User|sql:Error result = LearningPortalDb->queryRow(retrieveUserById(id));
-
-    if result is sql:NoRowsError {
-        UserNotFound userNotFound = {body: {message: string `id: ${id}`, details: string `users/${id}`, timeStamp: time:utcNow()}};
-        return userNotFound;
-    }
     return result;
 }
 
-public isolated function insertUser(NewUser newUser) returns http:Created|error {
-    _ = check LearningPortalDb->execute(postUser(newUser));
-
-    return http:CREATED;
+public isolated function insertUser(NewUser newUser) returns error? {
+    sql:ExecutionResult|sql:Error result = LearningPortalDb->execute(postUser(newUser));
+    if result is sql:Error {
+        return error(string `Failed to insert user: ${result.message()}`);
+    }
+    return;
 }
 
-public isolated function updateUser(int id, NewUser updatedUser) returns http:Ok|error {
-    _ = check LearningPortalDb->execute(putUser(id, updatedUser));
+public isolated function updateUser(int id, NewUser updatedUser) returns error? {
+    sql:ExecutionResult|sql:Error result = LearningPortalDb->execute(putUser(id, updatedUser));
+    if result is sql:Error {
+        return error(string `Failed to update user with id: ${id}: ${result.message()}`);
+    }
 
-    return http:OK;
+    return;
 }
 
-public isolated function deleteUser(int id) returns http:Ok|error {
-    _ = check LearningPortalDb->execute(deleUser(id));
-    return http:OK;
+public isolated function deleteUser(int id) returns error? {
+    sql:ExecutionResult|sql:Error result = LearningPortalDb->execute(deleUser(id));
+    if result is sql:Error {
+        return error(string `Failed to delete user with id: ${id}: ${result.message()}`);
+    }
+    return;
 }
 
 public isolated function searchUsers(string name, string role) returns User[]|error {
