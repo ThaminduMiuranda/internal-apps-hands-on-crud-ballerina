@@ -79,7 +79,11 @@ export default function Form({
           placeholder="Phone"
         />
         <input name="role" value={formData.role} disabled />
-        <button type="submit" disabled={!isFormValid}>
+        <button
+          type="submit"
+          className="bg-[color:var(--surface-3)] border-[color:var(--border-1)] text-[color:var(--text-1)] px-3 py-1 rounded-2xl"
+          disabled={!isFormValid}
+        >
           {mode === "edit" ? "Update User" : "Create User"}
         </button>
       </form>

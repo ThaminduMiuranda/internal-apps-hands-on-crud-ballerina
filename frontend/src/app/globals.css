@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* --background: #ffffff;
-  --foreground: #171717; */
   --primary-900: hsl(256, 43%, 7%);
   --primary-800: hsl(240, 24%, 13%);
   --primary-700: hsl(243, 26%, 15%);
@@ -21,12 +19,74 @@
   --surface-2: var(--primary-800);
   --surface-3: var(--primary-700);
   --border-1: var(--primary-500);
-
-  /* top */
   --border-2: var(--primary-600);
-
-  /* bottom */
 }
+
+/* :root {
+  --primary-900: hsl(456, 43%, 7%);
+  --primary-800: hsl(440, 24%, 13%);
+  --primary-700: hsl(443, 26%, 15%);
+  --primary-600: hsl(452, 9%, 22%);
+  --primary-500: hsl(459, 13%, 28%);
+  --primary-400: hsl(454, 22%, 32%);
+  --primary-300: hsl(451, 13%, 68%);
+  --primary-200: hsl(440, 15%, 76%);
+  --primary-100: hsl(440, 21%, 88%);
+  --neutral-100: hsl(200, 0%, 100%);
+  --accent-400: hsl(293, 60%, 69%);
+  --text-1: var(--neutral-100);
+  --text-2: var(--primary-100);
+  --text-3: var(--primary-200);
+  --surface-1: var(--primary-900);
+  --surface-2: var(--primary-800);
+  --surface-3: var(--primary-700);
+  --border-1: var(--primary-500);
+  --border-2: var(--primary-600);
+} */
+
+/* :root {
+  --primary-900: hsl(220, 30%, 10%);
+  --primary-800: hsl(220, 26%, 14%);
+  --primary-700: hsl(220, 24%, 18%);
+  --primary-600: hsl(220, 20%, 25%);
+  --primary-500: hsl(220, 18%, 35%);
+  --primary-400: hsl(220, 16%, 45%);
+  --primary-300: hsl(220, 14%, 65%);
+  --primary-200: hsl(220, 12%, 78%);
+  --primary-100: hsl(220, 10%, 90%);
+  --neutral-100: hsl(0, 0%, 100%);
+  --accent-400: hsl(185, 70%, 55%);
+  --text-1: var(--neutral-100);
+  --text-2: var(--primary-100);
+  --text-3: var(--primary-200);
+  --surface-1: var(--primary-900);
+  --surface-2: var(--primary-800);
+  --surface-3: var(--primary-700);
+  --border-1: var(--primary-500);
+  --border-2: var(--primary-600);
+} */
+
+/* :root {
+  --primary-900: hsl(310, 30%, 10%);
+  --primary-800: hsl(315, 34%, 15%);
+  --primary-700: hsl(320, 38%, 20%);
+  --primary-600: hsl(325, 42%, 30%);
+  --primary-500: hsl(330, 45%, 40%);
+  --primary-400: hsl(335, 50%, 50%);
+  --primary-300: hsl(340, 55%, 65%);
+  --primary-200: hsl(345, 60%, 75%);
+  --primary-100: hsl(350, 65%, 90%);
+  --neutral-100: hsl(0, 0%, 100%);
+  --accent-400: hsl(28, 90%, 60%);
+  --text-1: var(--neutral-100);
+  --text-2: var(--primary-100);
+  --text-3: var(--primary-200);
+  --surface-1: var(--primary-900);
+  --surface-2: var(--primary-800);
+  --surface-3: var(--primary-700);
+  --border-1: var(--primary-500);
+  --border-2: var(--primary-600);
+} */
 
 /* @theme inline {
   --color-background: var(--background);
@@ -66,6 +126,7 @@ body {
       hsl(from var(--primary-700) h s l / 0.7) 0 0
     ),
     url("https://images.unsplash.com/photo-1535408190508-be4c21946da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDc3NTcyOTB8&ixlib=rb-4.1.0&q=85");
+  /* background-image: url("https://images.unsplash.com/photo-1535408190508-be4c21946da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDc3NTcyOTB8&ixlib=rb-4.1.0&q=85"); */
   background-position: top left;
   background-size: 300%;
   line-height: 1.5;
