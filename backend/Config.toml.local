@@ -1,0 +1,7 @@
+[backend.database]
+[backend.database.databaseConfig]
+    user = "learning_portal_user"
+    password = "dummypassword"
+    database = "learning_portal_database"
+    host = "127.0.0.1"
+    port = 3306 
