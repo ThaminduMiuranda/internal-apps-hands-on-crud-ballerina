@@ -11,7 +11,8 @@
   --primary-200: hsl(240, 15%, 76%);
   --primary-100: hsl(240, 21%, 88%);
   --neutral-100: hsl(0, 0%, 100%);
-  --accent-400: hsl(93, 60%, 69%);
+  /* --accent-400: hsl(93, 60%, 69%); */
+  --accent-400: hsl(185, 70%, 55%);
   --text-1: var(--neutral-100);
   --text-2: var(--primary-100);
   --text-3: var(--primary-200);
@@ -44,6 +45,7 @@
   --border-2: var(--primary-600);
 } */
 
+/* blue */
 /* :root {
   --primary-900: hsl(220, 30%, 10%);
   --primary-800: hsl(220, 26%, 14%);
@@ -122,13 +124,18 @@ body {
   background-size: cover;
   color: var(--text-3);
   background-color: var(--primary-900);
+  /* background-image: linear-gradient(
+      hsl(from var(--primary-700) h s l / 0.7) 0 0
+    ),
+    url("https://images.unsplash.com/photo-1535408190508-be4c21946da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDc3NTcyOTB8&ixlib=rb-4.1.0&q=85"); */
   background-image: linear-gradient(
       hsl(from var(--primary-700) h s l / 0.7) 0 0
     ),
-    url("https://images.unsplash.com/photo-1535408190508-be4c21946da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDc3NTcyOTB8&ixlib=rb-4.1.0&q=85");
+    url("/assets/images/glass-portal.jpg");
   /* background-image: url("https://images.unsplash.com/photo-1535408190508-be4c21946da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDc3NTcyOTB8&ixlib=rb-4.1.0&q=85"); */
   background-position: top left;
-  background-size: 300%;
+  /* background-size: 300%; */
+  background-size: cover;
   line-height: 1.5;
   padding: 2rem 2rem;
 }

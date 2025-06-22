@@ -62,14 +62,14 @@ export default function UserGrid() {
             />
             <button
               type="submit"
-              className="bg-[color:var(--surface-3)] border-[color:var(--border-1)] text-[color:var(--text-1)] px-3 py-1 rounded-2xl"
+              className="bg-[color:var(--primary-800)] border-[color:var(--border-1)] text-[color:var(--text-1)] px-3 py-1 rounded-2xl cursor-pointer hover:bg-[color:var(--primary-900)]"
             >
               Search
             </button>
             <button
               type="button"
               onClick={loadUsers}
-              className="bg-[color:var(--primary-400)] text-[color:var(--text-2)] px-3 py-1 border-[color:var(--border-2)] rounded-2xl"
+              className="bg-[color:var(--primary-600)] text-[color:var(--text-2)] px-3 py-1 border-[color:var(--border-2)] rounded-2xl cursor-pointer hover:bg-[color:var(--primary-500)]"
             >
               Reset
             </button>

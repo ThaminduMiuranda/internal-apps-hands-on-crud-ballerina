@@ -21,11 +21,16 @@ export default function Edit() {
   }
   return (
     <>
-      <CardWrapper>
-        <div className="">
-          <Form mode="edit" initialData={user} />
-        </div>
-      </CardWrapper>
+      <div className="">
+        <h1 className="text-center text-[color:var(--text-1)] text-[1.325rem] font-medium pb-[3ch]">
+          Learning Portal - Edit User
+        </h1>
+        <CardWrapper>
+          <div className="">
+            <Form mode="edit" initialData={user} />
+          </div>
+        </CardWrapper>
+      </div>
     </>
   );
 }

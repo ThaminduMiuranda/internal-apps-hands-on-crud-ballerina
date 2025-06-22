@@ -59,29 +59,63 @@ export default function Form({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-        />
-        <input
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />
-        <input
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Phone"
-        />
-        <input name="role" value={formData.role} disabled />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="flex gap-4">
+          <label htmlFor="name" className="w-24 p-1">
+            Full Name:
+          </label>
+          <input
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="p-1  w-full border rounded-2xl"
+          />
+        </div>
+        <div className="flex gap-4">
+          <label htmlFor="email" className="w-24 p-1">
+            Email:
+          </label>
+          <input
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="p-1 w-full  border rounded-2xl"
+          />
+        </div>
+        <div className="flex gap-4">
+          <label htmlFor="phone" className="w-24 p-1">
+            Phone No:
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Phone"
+            className="p-1  w-full border rounded-2xl"
+          />
+        </div>
+        <div className="flex gap-4">
+          <label htmlFor="role" className="w-24 p-1">
+            Role:
+          </label>
+          <input
+            id="role"
+            name="role"
+            placeholder="admin, student, instructor"
+            value={formData.role}
+            onChange={handleChange}
+            disabled={mode === "edit"}
+            className="p-1 border rounded-2xl w-full"
+          />
+        </div>
         <button
           type="submit"
-          className="bg-[color:var(--surface-3)] border-[color:var(--border-1)] text-[color:var(--text-1)] px-3 py-1 rounded-2xl"
+          className="bg-[color:var(--primary-800)] border-[color:var(--border-1)] text-[color:var(--text-1)] p-2 rounded-lg hover:bg-[color:var(--primary-900)] cursor-pointer"
           disabled={!isFormValid}
         >
           {mode === "edit" ? "Update User" : "Create User"}
