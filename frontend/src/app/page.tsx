@@ -1,4 +1,4 @@
-import UserGrid from "@/components/CardGrid/UserGrid";
+import UserGrid from "@/components/UserComponents/UserGrid/UserGrid";
 
 export default function Home() {
   return (

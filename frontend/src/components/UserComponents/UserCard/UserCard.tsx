@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function UserCard(props: any) {
   const user = props.user;
@@ -13,21 +14,24 @@ export default function UserCard(props: any) {
             <span className="font-bold">{user.id}</span>
           </h1>
           <div className=" absolute right-[3ch] top-0 bottom-0 flex gap-2">
-            <Image
-              src={"/assets/images/deleteUser.svg"}
-              alt="Delete User"
-              width={24}
-              height={24}
-              className="mouse-pointer"
-              onClick={() => props.onDelete(user.id)}
-            />
-            <Image
-              src={"assets/images/editUser.svg"}
-              alt="Edit User"
-              width={24}
-              height={24}
-              className=""
-            />
+            <Link href={"#"} onClick={() => props.onDelete(user.id)}>
+              <Image
+                src={"/assets/images/deleteUser.svg"}
+                alt="Delete User"
+                width={24}
+                height={24}
+                className="mouse-pointer"
+              />
+            </Link>
+            <Link href={`/edit/${user.id}`}>
+              <Image
+                src={"assets/images/editUser.svg"}
+                alt="Edit User"
+                width={24}
+                height={24}
+                className=""
+              />
+            </Link>
           </div>
         </div>
         <div className="">

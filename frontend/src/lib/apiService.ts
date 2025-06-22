@@ -1,4 +1,5 @@
-import { getUsers, deleteUser } from "./api";
+import { stringify } from "querystring";
+import { getUsers, deleteUser, createUser } from "./api";
 
 export const fetchUsers = async () => {
   const res = await getUsers();
@@ -11,4 +12,18 @@ export const fetchUsers = async () => {
 export const handleDelete = async (id: number) => {
   await deleteUser(id);
   fetchUsers();
+};
+
+export const handleCreate = async (
+  name: string,
+  email: string,
+  role: string,
+  phone: string
+) => {
+  await createUser({
+    name,
+    email,
+    role,
+    phone,
+  });
 };
