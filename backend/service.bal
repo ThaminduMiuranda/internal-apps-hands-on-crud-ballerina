@@ -158,12 +158,22 @@ service /learning\-portal on new http:Listener(9090) {
         User[]|error result = database:searchUsers(name, role);
 
         if result is sql:NoRowsError || result == [] {
-            UserNotFound userNotFound = {body: {message: "User not found", details: string `User with searched name doesn't exist`}};
+            UserNotFound userNotFound = {
+                body: {
+                    message: "User not found",
+                    details: string `User with searched name doesn't exist`
+                }
+            };
             return userNotFound;
         }
 
         if result is error {
-            InternalServerError internalServerError = {body: {message: "Internal Server Error", details: result.message()}};
+            InternalServerError internalServerError = {
+                body: {
+                    message: "Internal Server Error",
+                    details: result.message()
+                }
+            };
             return internalServerError;
         }
 
