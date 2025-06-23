@@ -3,10 +3,6 @@ import backend.database;
 import ballerina/http;
 import ballerina/sql;
 
-// import ballerina/sql;
-
-// listener http:Listener userApiEP = new(9090);
-
 @http:ServiceConfig {
     cors: {
         allowOrigins: ["http://localhost:3000", "http://localhost:5173"],
@@ -39,7 +35,7 @@ service /learning\-portal on new http:Listener(9090) {
         UserNotFound userNotFound = {
             body: {
                 message: "User not found",
-                details: string `User with id: ${id} doesn't exists`
+                details: string `User with id: ${id} doesn't exist`
             }
         };
 
@@ -64,15 +60,19 @@ service /learning\-portal on new http:Listener(9090) {
         if result is error {
             string errMsg = result.message();
 
-            ConflictError conflictError = {body: {
+            ConflictError conflictError = {
+                body: {
                     message: "Conflict",
                     details: "A user with the same email already exists"
-                }};
+                }
+            };
 
-            InvalidInput invalidInput = {body: {
+            InvalidInput invalidInput = {
+                body: {
                     message: "Invalid Input",
                     details: errMsg
-                }};
+                }
+            };
 
             if string:includes(errMsg, "Duplicates") || string:includes(errMsg, "duplicate") {
                 return conflictError;
@@ -98,15 +98,19 @@ service /learning\-portal on new http:Listener(9090) {
         if result is error {
             string errMsg = result.message();
 
-            ConflictError conflictError = {body: {
+            ConflictError conflictError = {
+                body: {
                     message: "Conflict",
                     details: "A user with the same email already exists"
-                }};
+                }
+            };
 
-            InvalidInput invalidInput = {body: {
+            InvalidInput invalidInput = {
+                body: {
                     message: "Invalid Input",
                     details: errMsg
-                }};
+                }
+            };
 
             if string:includes(errMsg, "Duplicates") || string:includes(errMsg, "duplicate") {
                 return conflictError;
@@ -119,7 +123,7 @@ service /learning\-portal on new http:Listener(9090) {
             body: {
                 status: http:STATUS_OK,
                 body: {
-                    message: "User created successfully"
+                    message: "User updated successfully"
                 }
             }
         };
@@ -154,7 +158,7 @@ service /learning\-portal on new http:Listener(9090) {
         User[]|error result = database:searchUsers(name, role);
 
         if result is sql:NoRowsError || result == [] {
-            UserNotFound userNotFound = {body: {message: "User not found", details: string `User with serched name doesn't exist`}};
+            UserNotFound userNotFound = {body: {message: "User not found", details: string `User with searched name doesn't exist`}};
             return userNotFound;
         }
 
