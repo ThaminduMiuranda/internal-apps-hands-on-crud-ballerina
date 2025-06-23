@@ -30,6 +30,7 @@ service /learning\-portal on new http:Listener(9090) {
     }
 
     resource function get users/[int id](http:RequestContext ctx) returns User|UserNotFound|InternalServerError|error {
+
         User|error result = database:userById(id);
 
         UserNotFound userNotFound = {
@@ -54,7 +55,9 @@ service /learning\-portal on new http:Listener(9090) {
         return result;
     }
 
-    resource function post users(http:RequestContext ctx, NewUser newUser) returns http:Created|InvalidInput|ConflictError|InternalServerError|error {
+    resource function post users(http:RequestContext ctx, NewUser newUser)
+        returns http:Created|InvalidInput|ConflictError|InternalServerError|error {
+
         error? result = database:insertUser(newUser);
 
         if result is error {
@@ -91,7 +94,8 @@ service /learning\-portal on new http:Listener(9090) {
         };
     }
 
-    resource function put users/[int id](http:RequestContext ctx, NewUser updatedUser) returns http:Ok|InvalidInput|ConflictError|InternalServerError|error {
+    resource function put users/[int id](http:RequestContext ctx, NewUser updatedUser)
+        returns http:Ok|InvalidInput|ConflictError|InternalServerError|error {
 
         error? result = database:updateUser(id, updatedUser);
 
@@ -129,7 +133,9 @@ service /learning\-portal on new http:Listener(9090) {
         };
     }
 
-    resource function delete users/[int id](http:RequestContext ctx) returns http:Ok|InvalidInput|InternalServerError|error {
+    resource function delete users/[int id](http:RequestContext ctx)
+        returns http:Ok|InvalidInput|InternalServerError|error {
+
         error? result = database:deleteUser(id);
 
         if result is error {
@@ -153,7 +159,8 @@ service /learning\-portal on new http:Listener(9090) {
         };
     }
 
-    resource function get users/user(http:RequestContext ctx, string name, string role) returns User[]|UserNotFound|InternalServerError|error {
+    resource function get users/user(http:RequestContext ctx, string name, string role)
+        returns User[]|UserNotFound|InternalServerError|error {
 
         User[]|error result = database:searchUsers(name, role);
 
