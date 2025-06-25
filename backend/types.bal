@@ -2,6 +2,13 @@ import ballerina/constraint;
 import ballerina/http;
 import ballerina/time;
 
+type UserClient object {
+    isolated function insertUser(User user) returns int|error;
+    isolated function getUserById(int id) returns User|error;
+    isolated function updateUser(int id, User user) returns int|error;
+    isolated function deleteUser(int id) returns int|error;
+};
+
 type Role "student"|"instructor"|"admin";
 
 type User record {|

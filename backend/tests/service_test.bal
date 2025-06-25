@@ -1,33 +1,21 @@
 import ballerina/http;
-import ballerina/io;
 import ballerina/test;
+// import ballerinax/mysql;
 
-http:Client testClient = check new ("http://localhost:9090");
+// import backend.database;
 
-// Before Suite Function
-@test:BeforeSuite
-function beforeSuiteFunc() {
-    io:println("I'm the before suite function!");
-}
+http:Client LearningPortalDb = check new("http://localhost:9090/learning-portal/");
 
-// Test function
-@test:Config {}
-function testServiceWithProperName() {
-    string|error response = testClient->/greeting(name = "John");
-    test:assertEquals(response, "Hello, John");
-}
+@test:Config
+function testGetUsers() returns error? {
+    User[] usersExpected = [
+        {id: 1, name: "Alice Perera", email: "alice@example.com", role: "student", phone: "+94711234567"},
+        {id: 2, name: "Bob Silva", email: "bob@example.com", role: "instructor", phone: "+94779876543"}
+    ];
+    test:prepare(LearningPortalDb).when("query").thenReturn(usersExpected);
 
-// Negative test function
-@test:Config {}
-function testServiceWithEmptyName() returns error? {
-    http:Response response = check testClient->/greeting;
-    test:assertEquals(response.statusCode, 500);
-    json errorPayload = check response.getJsonPayload();
-    test:assertEquals(errorPayload.message, "name should not be empty!");
-}
+    http:Client learningPortalEndpoint = check new("http://localhost:9090/learning-portal");
+    User[] usersActual = check learningPortalEndpoint->/users;
 
-// After Suite Function
-@test:AfterSuite
-function afterSuiteFunc() {
-    io:println("I'm the after suite function!");
+    test:assertEquals(usersActual, usersExpected, msg = "Users list should match expected values");
 }

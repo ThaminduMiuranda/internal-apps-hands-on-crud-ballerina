@@ -11,7 +11,6 @@ import ballerina/sql;
         allowCredentials: false
     }
 }
-
 service /learning\-portal on new http:Listener(9090) {
 
     resource function get users(http:RequestContext ctx) returns User[]|InternalServerError|error {
