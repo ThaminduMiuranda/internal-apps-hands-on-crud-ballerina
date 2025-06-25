@@ -3,10 +3,6 @@ import backend.database;
 import ballerina/http;
 import ballerina/sql;
 
-// import ballerina/sql;
-
-// listener http:Listener userApiEP = new(9090);
-
 @http:ServiceConfig {
     cors: {
         allowOrigins: ["http://localhost:3000", "http://localhost:5173"],
@@ -34,12 +30,13 @@ service /learning\-portal on new http:Listener(9090) {
     }
 
     resource function get users/[int id](http:RequestContext ctx) returns User|UserNotFound|InternalServerError|error {
+
         User|error result = database:userById(id);
 
         UserNotFound userNotFound = {
             body: {
                 message: "User not found",
-                details: string `User with id: ${id} doesn't exists`
+                details: string `User with id: ${id} doesn't exist`
             }
         };
 
@@ -58,21 +55,27 @@ service /learning\-portal on new http:Listener(9090) {
         return result;
     }
 
-    resource function post users(http:RequestContext ctx, NewUser newUser) returns http:Created|InvalidInput|ConflictError|InternalServerError|error {
+    resource function post users(http:RequestContext ctx, NewUser newUser)
+        returns http:Created|InvalidInput|ConflictError|InternalServerError|error {
+
         error? result = database:insertUser(newUser);
 
         if result is error {
             string errMsg = result.message();
 
-            ConflictError conflictError = {body: {
+            ConflictError conflictError = {
+                body: {
                     message: "Conflict",
                     details: "A user with the same email already exists"
-                }};
+                }
+            };
 
-            InvalidInput invalidInput = {body: {
+            InvalidInput invalidInput = {
+                body: {
                     message: "Invalid Input",
                     details: errMsg
-                }};
+                }
+            };
 
             if string:includes(errMsg, "Duplicates") || string:includes(errMsg, "duplicate") {
                 return conflictError;
@@ -91,22 +94,27 @@ service /learning\-portal on new http:Listener(9090) {
         };
     }
 
-    resource function put users/[int id](http:RequestContext ctx, NewUser updatedUser) returns http:Ok|InvalidInput|ConflictError|InternalServerError|error {
+    resource function put users/[int id](http:RequestContext ctx, NewUser updatedUser)
+        returns http:Ok|InvalidInput|ConflictError|InternalServerError|error {
 
         error? result = database:updateUser(id, updatedUser);
 
         if result is error {
             string errMsg = result.message();
 
-            ConflictError conflictError = {body: {
+            ConflictError conflictError = {
+                body: {
                     message: "Conflict",
                     details: "A user with the same email already exists"
-                }};
+                }
+            };
 
-            InvalidInput invalidInput = {body: {
+            InvalidInput invalidInput = {
+                body: {
                     message: "Invalid Input",
                     details: errMsg
-                }};
+                }
+            };
 
             if string:includes(errMsg, "Duplicates") || string:includes(errMsg, "duplicate") {
                 return conflictError;
@@ -119,13 +127,15 @@ service /learning\-portal on new http:Listener(9090) {
             body: {
                 status: http:STATUS_OK,
                 body: {
-                    message: "User created successfully"
+                    message: "User updated successfully"
                 }
             }
         };
     }
 
-    resource function delete users/[int id](http:RequestContext ctx) returns http:Ok|InvalidInput|InternalServerError|error {
+    resource function delete users/[int id](http:RequestContext ctx)
+        returns http:Ok|InvalidInput|InternalServerError|error {
+
         error? result = database:deleteUser(id);
 
         if result is error {
@@ -149,17 +159,28 @@ service /learning\-portal on new http:Listener(9090) {
         };
     }
 
-    resource function get users/user(http:RequestContext ctx, string name, string role) returns User[]|UserNotFound|InternalServerError|error {
+    resource function get users/user(http:RequestContext ctx, string name, string role)
+        returns User[]|UserNotFound|InternalServerError|error {
 
         User[]|error result = database:searchUsers(name, role);
 
         if result is sql:NoRowsError || result == [] {
-            UserNotFound userNotFound = {body: {message: "User not found", details: string `User with serched name doesn't exist`}};
+            UserNotFound userNotFound = {
+                body: {
+                    message: "User not found",
+                    details: string `User with searched name doesn't exist`
+                }
+            };
             return userNotFound;
         }
 
         if result is error {
-            InternalServerError internalServerError = {body: {message: "Internal Server Error", details: result.message()}};
+            InternalServerError internalServerError = {
+                body: {
+                    message: "Internal Server Error",
+                    details: result.message()
+                }
+            };
             return internalServerError;
         }
 
